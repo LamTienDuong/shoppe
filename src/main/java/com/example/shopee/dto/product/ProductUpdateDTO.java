@@ -1,6 +1,7 @@
 package com.example.shopee.dto.product;
 
 
+import com.example.shopee.dto.category.CategoryDTO;
 import com.example.shopee.entity.Category;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,7 +34,7 @@ public class ProductUpdateDTO implements Validator {
     private String description;
 
     @Valid
-    private Category category;
+    private CategoryDTO category;
 
     @Override
     public boolean supports(Class<?> clazz) {
