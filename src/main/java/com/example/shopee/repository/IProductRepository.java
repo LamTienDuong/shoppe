@@ -8,10 +8,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.List;
 
 public interface IProductRepository extends JpaRepository<Product, Integer> {
 
-    @Query(value = "FROM Product p where p.title like concat('%', :ten, '%')")
-    Page<Product> search(@Param("ten") String ten, Pageable pageable);
+    @Query(value = "FROM Product p where p.title like concat('%', :ten, '%')" +
+                    " and (:cid = '' or p.category.id = :cid)")
+    Page<Product> search(@Param("ten") String ten, @Param("cid") String categoryId, Pageable pageable);
 }

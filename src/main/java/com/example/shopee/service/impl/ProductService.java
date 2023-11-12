@@ -21,7 +21,8 @@ public class ProductService implements IProductService {
         if (productSearchDTO.getTitle() == null) {
             productSearchDTO.setTitle("");
         }
-        return productRepository.search(productSearchDTO.getTitle(), pageable);
+
+        return productRepository.search(productSearchDTO.getTitle(), productSearchDTO.getCategoryId(), pageable);
     }
 
     @Override

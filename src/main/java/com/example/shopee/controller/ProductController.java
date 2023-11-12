@@ -34,7 +34,7 @@ public class ProductController {
 
     @GetMapping("")
     public ResponseEntity<Page<Product>> getProducts(ProductSearchDTO productSearchDTO,
-                                                 @PageableDefault(size = 4, sort = "title", direction = Sort.Direction.ASC) Pageable pageable) {
+                                                 @PageableDefault(size = 5, sort = "category", direction = Sort.Direction.ASC) Pageable pageable) {
         Page<Product> productList = productService.findAll(productSearchDTO, pageable);
         return new ResponseEntity<>(productList, HttpStatus.OK) ;
     }
@@ -97,6 +97,4 @@ public class ProductController {
         productService.update(productNew);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-
 }
