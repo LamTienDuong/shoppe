@@ -31,7 +31,6 @@ public class ProductController {
     private IProductService productService;
     @Autowired
     IProductMapper productMapper;
-
     @GetMapping("")
     public ResponseEntity<Page<Product>> getProducts(ProductSearchDTO productSearchDTO,
                                                  @PageableDefault(size = 5, sort = "category", direction = Sort.Direction.ASC) Pageable pageable) {
