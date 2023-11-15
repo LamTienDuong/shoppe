@@ -2,6 +2,8 @@ package com.example.shopee.controller;
 
 import com.example.shopee.entity.*;
 import com.example.shopee.service.*;
+import com.example.shopee.entity.CartProduct;
+import com.example.shopee.service.ICartProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
