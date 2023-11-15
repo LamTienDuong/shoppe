@@ -14,4 +14,7 @@ public interface IOderRepository extends JpaRepository<Oder, Integer> {
                     "where (:year = '' or :year is null or YEAR(o.oder_date) = :year)" +
                     "and (:month = '' or :month is null or  MONTH(o.oder_date) = :month)", nativeQuery = true)
     Integer getMonthlySalesCount(@Param("year") int year, @Param("month") int month);
+
+    @Query(value = "from Oder o where o.user.id = :id")
+    List<Oder> findByUserId(int id);
 }

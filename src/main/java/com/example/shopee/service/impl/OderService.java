@@ -18,4 +18,15 @@ public class OderService implements IOderService {
     public Integer getMonthlySalesCount(int year, int month) {
         return oderRepository.getMonthlySalesCount(year, month);
     }
+
+    @Override
+    public List<Oder> findByUserId(int id) {
+        return oderRepository.findByUserId(id);
+    }
+
+    @Override
+    public void create(Oder oder) {
+        oderRepository.save(oder);
+    }
+
 }

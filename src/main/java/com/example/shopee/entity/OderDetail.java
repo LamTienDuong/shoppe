@@ -19,6 +19,8 @@ public class OderDetail {
     @Column(name = "price")
     private int price;
 
+    @Column(name = "quantity")
+    private int quantity;
     @ManyToOne
     @JoinColumn(name = "oder_id")
     private Oder oder;
