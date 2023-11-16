@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @RestController
@@ -28,6 +29,12 @@ public class CategoryController {
     public ResponseEntity<List<Category>> getCategory() {
         List<Category> categoryList = categoryService.findAll();
         return new ResponseEntity<>(categoryList, HttpStatus.OK) ;
+    }
+
+    @GetMapping("quantity")
+    public ResponseEntity<List<Object[]>> getQuantityCategory() {
+        List<Object[]> result = categoryService.getQuantityByCategory();
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 }
