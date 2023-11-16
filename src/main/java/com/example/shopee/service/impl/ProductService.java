@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ProductService implements IProductService {
@@ -23,6 +24,11 @@ public class ProductService implements IProductService {
         }
 
         return productRepository.search(productSearchDTO.getTitle(), productSearchDTO.getCategoryId(), pageable);
+    }
+
+    @Override
+    public Page<Product> search(ProductSearchDTO productSearchDTO, Pageable pageable) {
+        return productRepository.search(productSearchDTO, pageable);
     }
 
     @Override

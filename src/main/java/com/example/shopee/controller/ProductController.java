@@ -19,7 +19,6 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,8 +26,10 @@ import java.util.List;
 @RequestMapping("products")
 @CrossOrigin("http://127.0.0.1:5500/")
 public class ProductController {
+
     @Autowired
     private IProductService productService;
+
     @Autowired
     IProductMapper productMapper;
     @GetMapping("")
@@ -36,6 +37,14 @@ public class ProductController {
                                                  @PageableDefault(size = 5, sort = "category", direction = Sort.Direction.ASC) Pageable pageable) {
         Page<Product> productList = productService.findAll(productSearchDTO, pageable);
         return new ResponseEntity<>(productList, HttpStatus.OK) ;
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<Page<Product>> getProducts2(
+            ProductSearchDTO productSearchDTO,
+            @PageableDefault(size = 10, sort = "title", direction = Sort.Direction.ASC) Pageable pageable) {
+        Page<Product> products = productService.search(productSearchDTO, pageable);
+        return ResponseEntity.ok(products);
     }
 
     @GetMapping("{id}")
@@ -69,12 +78,12 @@ public class ProductController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         productService.delete(id);
-        return new ResponseEntity<>(product ,HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(product, HttpStatus.NO_CONTENT);
     }
 
     @PutMapping("{id}")
-    public  ResponseEntity<?> update(@PathVariable("id") int id,
-                                     @Validated @RequestBody ProductUpdateDTO productUpdateDTO, BindingResult bindingResult) {
+    public ResponseEntity<?> update(@PathVariable("id") int id,
+                                    @Validated @RequestBody ProductUpdateDTO productUpdateDTO, BindingResult bindingResult) {
         Product product = productService.findById(id);
         if (product == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -84,11 +93,11 @@ public class ProductController {
         if (bindingResult.hasErrors()) {
             List<MessageErrorDTO> messageErrorDTOList = new ArrayList<>();
 
-            for (FieldError fieldError: bindingResult.getFieldErrors()) {
+            for (FieldError fieldError : bindingResult.getFieldErrors()) {
                 MessageErrorDTO messageErrorDTO = new MessageErrorDTO(fieldError.getField(), fieldError.getDefaultMessage());
                 messageErrorDTOList.add(messageErrorDTO);
             }
-            return new ResponseEntity<>(messageErrorDTOList, HttpStatus.BAD_REQUEST.BAD_REQUEST);
+            return new ResponseEntity<>(messageErrorDTOList, HttpStatus.BAD_REQUEST);
         }
 
         Product productNew = productMapper.toProductFromProductUpdateDTO(productUpdateDTO);

@@ -11,7 +11,7 @@ import java.util.List;
 public interface IProductService {
 
     Page<Product> findAll(ProductSearchDTO productSearchDTO, Pageable pageable);
-
+    Page<Product> search(ProductSearchDTO productSearchDTO, Pageable pageable);
     Product findById(int id);
 
     void create(Product product);
@@ -19,4 +19,7 @@ public interface IProductService {
     void update(Product product);
 
     void delete(int id);
+
+
+//    Page<Product> getProductsByCategories(List<String> categoryNames, ProductSearchDTO productSearchDTO ,Pageable pageable);
 }
