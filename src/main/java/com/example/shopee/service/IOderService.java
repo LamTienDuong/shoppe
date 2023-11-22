@@ -9,5 +9,9 @@ public interface IOderService {
 
     List<Oder> findByUserId(int id);
 
+    Oder findById(int id);
+
     void create(Oder oder);
+
+    void delete(Oder oder);
 }

@@ -9,5 +9,6 @@ public interface IOderDetailService {
 
     void create(OderDetail oderDetail);
 
-    List<OderDetail> findAll(int oderId);
+    void delete(OderDetail oderDetail);
+
 }

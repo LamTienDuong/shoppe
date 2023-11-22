@@ -1,6 +1,8 @@
 package com.example.shopee.controller;
 
 import com.example.shopee.entity.Oder;
+import com.example.shopee.entity.OderDetail;
+import com.example.shopee.service.IOderDetailService;
 import com.example.shopee.service.IOderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -15,6 +17,8 @@ import java.util.List;
 @RequestMapping("oders")
 @CrossOrigin("http://127.0.0.1:5500/")
 public class OderController {
+    @Autowired
+    private IOderDetailService oderDetailService;
 
     @Autowired
     private IOderService oderService;
@@ -30,4 +34,25 @@ public class OderController {
 
         return new ResponseEntity<>(monthlySales, HttpStatus.OK);
     }
+
+    @DeleteMapping ("{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") int id) {
+        Oder oder = oderService.findById(id);
+        List<OderDetail> oderDetailList = oderDetailService.findByOderId(oder.getId());
+        for (OderDetail oderDetail : oderDetailList) {
+            oderDetailService.delete(oderDetail);
+        }
+        oderService.delete(oder);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping ("{id}")
+    public ResponseEntity<List<OderDetail>> getOder(@PathVariable("id") int id) {
+        Oder oder = oderService.findById(id);
+        List<OderDetail> oderDetailList = oderDetailService.findByOderId(oder.getId());
+
+        return new ResponseEntity<>(oderDetailList,HttpStatus.OK);
+    }
+
 }

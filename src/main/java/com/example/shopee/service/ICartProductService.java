@@ -9,5 +9,7 @@ public interface ICartProductService {
 
     CartProduct findById(int id);
 
+    void save(CartProduct cartProduct);
+
     void delete(int idCartProduct);
 }

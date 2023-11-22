@@ -25,8 +25,18 @@ public class OderService implements IOderService {
     }
 
     @Override
+    public Oder findById(int id) {
+        return oderRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public void create(Oder oder) {
         oderRepository.save(oder);
+    }
+
+    @Override
+    public void delete(Oder oder) {
+        oderRepository.delete(oder);
     }
 
 }

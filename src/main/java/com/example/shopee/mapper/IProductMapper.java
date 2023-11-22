@@ -7,7 +7,7 @@ import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
 
-@Mapper(componentModel = "spring", builder = @Builder(disableBuilder = true))
+@Mapper(componentModel = "spring", builder = @Builder(disableBuilder = false))
 @Component("productMapper")
 public interface IProductMapper {
     Product toProductFromProductCreateDTO(ProductCreateDTO productCreateDTO);

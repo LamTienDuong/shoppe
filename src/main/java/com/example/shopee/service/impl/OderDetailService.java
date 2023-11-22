@@ -24,7 +24,8 @@ public class OderDetailService implements IOderDetailService {
     }
 
     @Override
-    public List<OderDetail> findAll(int oderId) {
-        return null;
+    public void delete(OderDetail oderDetail) {
+        oderDetailRepository.delete(oderDetail);
     }
+
 }

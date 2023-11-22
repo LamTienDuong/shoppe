@@ -10,4 +10,5 @@ public interface IOderDetailRepository extends JpaRepository<OderDetail, Integer
 
     @Query(value = "from OderDetail od where od.oder.id = :id")
     List<OderDetail> findByOderId(int id);
+
 }
