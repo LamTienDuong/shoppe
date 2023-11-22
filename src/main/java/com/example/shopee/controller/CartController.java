@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -39,6 +40,18 @@ public class CartController {
         oder.setOrderDate(date);
         oder.setUser(userService.findById(id));
 
+        List<Product> productList = new ArrayList<>();
+        for (String e : products.getArrayProduct()) {
+            // Tìm sản phẩm trong giỏ hàng
+            CartProduct cartProduct = cartProductService.findById(Integer.parseInt(e));
+            // Tìm sản phẩm trong kho
+            Product product = productService.findById(cartProduct.getProduct().getId());
+            product.setQuantity(product.getQuantity() - cartProduct.getQuantity());
+
+            // Cập nhật số lượng sản phẩm trong kho
+            productService.create(product);
+        }
+
         // Tạo mới hóa đơn lưu vào database
         oderService.create(oder);
 
@@ -53,6 +66,7 @@ public class CartController {
 
             // Tìm sản phẩm trong database
             Product product = productService.findById(cartProduct.getProduct().getId());
+
             oderDetail.setProduct(product);
 
             // Them hóa đơn vừa tạo vào chi tiết hóa đơn
@@ -60,9 +74,14 @@ public class CartController {
 
             oderDetailService.create(oderDetail);
 
+
+
             // Xóa cartProduct
             cartProductService.delete(cartProduct.getId());
         }
+
+
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

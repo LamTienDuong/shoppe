@@ -22,6 +22,11 @@ public class CartProductService implements ICartProductService {
         return cartProductRepository.findById(id).orElse(null);
     }
 
+    @Override
+    public void save(CartProduct cartProduct) {
+        cartProductRepository.save(cartProduct);
+    }
+
     public void delete(int idCartProduct) {
         cartProductRepository.delete(findById(idCartProduct));
     }

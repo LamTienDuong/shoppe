@@ -26,11 +26,8 @@ public class OrderHistoryController {
     private IOderDetailService oderDetailService;
 
     @GetMapping("{userId}")
-    public ResponseEntity<List<OderDetail>> getOderDetails(@PathVariable("userId") int id) {
-        List<Oder> oderList = oderService.findByUserId(id);
-        List<OderDetail> oderDetails ;
-
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<List<Oder>> getOderDetails(@PathVariable("userId") int id) {
+        return new ResponseEntity<>(oderService.findByUserId(id),HttpStatus.OK);
     }
 
 }
