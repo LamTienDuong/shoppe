@@ -37,4 +37,19 @@ public class UserController {
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
+
+    @GetMapping("/username")
+    public ResponseEntity<String> getUserName() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            // Lấy thông tin người dùng từ principal
+            String email = authentication.getName();
+            // Tìm kiếm thông tin nguoi dùng thông qua email
+            Optional<User> user = userService.findByEmail(email);
+
+            return new ResponseEntity<>(user.orElse(new User()).getUsername(), HttpStatus.OK) ;
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
 }

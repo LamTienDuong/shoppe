@@ -42,15 +42,15 @@ public class IProductCustomRepositoryImpl implements IProductCustomRepository {
 
         // Tìm kiếm theo giá
         if ("lt2".equals(productSearchDTO.getDiscount())) {
-            predicate = cb.and(predicate, cb.lt(root.get("discount"), 2000000));
+            predicate = cb.and(predicate, cb.lt(root.get("discount"), 200000));
         } else if ("2-5".equals(productSearchDTO.getDiscount())) {
-            predicate = cb.and(predicate, cb.greaterThanOrEqualTo(root.get("discount"), 2000000),
-                    cb.lessThan(root.get("discount"), 5000000));
+            predicate = cb.and(predicate, cb.greaterThanOrEqualTo(root.get("discount"), 200000),
+                    cb.lessThan(root.get("discount"), 500000));
         } else if ("5-10".equals(productSearchDTO.getDiscount())) {
-            predicate = cb.and(predicate, cb.greaterThanOrEqualTo(root.get("discount"), 5000000),
-                    cb.lessThan(root.get("discount"), 10000000));
+            predicate = cb.and(predicate, cb.greaterThanOrEqualTo(root.get("discount"), 500000),
+                    cb.lessThan(root.get("discount"), 1000000));
         } else if ("gt10".equals(productSearchDTO.getDiscount())) {
-            predicate = cb.and(predicate, cb.ge(root.get("discount"), 10000000));
+            predicate = cb.and(predicate, cb.ge(root.get("discount"), 1000000));
         }
 
         // thực hiện câu truy vấn
@@ -92,15 +92,15 @@ public class IProductCustomRepositoryImpl implements IProductCustomRepository {
 
         // Tìm kiếm theo giá
         if ("lt2".equals(productSearchDTO.getDiscount())) {
-            predicate = cb.and(predicate, cb.lt(root.get("discount"), 2000000));
+            predicate = cb.and(predicate, cb.lt(root.get("discount"), 200000));
         } else if ("2-5".equals(productSearchDTO.getDiscount())) {
-            predicate = cb.and(predicate, cb.greaterThanOrEqualTo(root.get("discount"), 2000000),
-                    cb.lessThan(root.get("discount"), 5000000));
+            predicate = cb.and(predicate, cb.greaterThanOrEqualTo(root.get("discount"), 200000),
+                    cb.lessThan(root.get("discount"), 500000));
         } else if ("5-10".equals(productSearchDTO.getDiscount())) {
-            predicate = cb.and(predicate, cb.greaterThanOrEqualTo(root.get("discount"), 5000000),
-                    cb.lessThan(root.get("discount"), 10000000));
+            predicate = cb.and(predicate, cb.greaterThanOrEqualTo(root.get("discount"), 500000),
+                    cb.lessThan(root.get("discount"), 1000000));
         } else if ("gt10".equals(productSearchDTO.getDiscount())) {
-            predicate = cb.and(predicate, cb.ge(root.get("discount"), 10000000));
+            predicate = cb.and(predicate, cb.ge(root.get("discount"), 1000000));
         }
 
         cq.select(cb.count(root)).where(predicate);
